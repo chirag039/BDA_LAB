@@ -1,0 +1,64 @@
+1. Create a key space by name Library
+
+Create Keyspace library1 with replication ={'class':'SimpleStrategy','replication_factor':3};
+use library1;
+
+2. Create a column family by name Library-Info with attributes Stud_Id Primary Key,
+Counter_value of type Counter,
+Stud_Name, Book-Name, Book-Id, Date_of_issue
+
+create table library_info(stud_id int,counter_value counter,stud_name text,book_name text,book_id int,date_issue timestamp,primary key(stud_id,stud_name,book_name,book_id,date_issue));
+
+3. Insert the values into the table in batch
+update library_info set counter_value=counter_value+1 where stud_id=111 and stud_name='M' and book_name='BDA' and date_issue='2022-09-06' and book_id =222;
+update library_info set counter_value=counter_value+1 where stud_id=112 and stud_name='A' and book_name='BDA' and date_issue='2022-10-03' and book_id =333;
+update library_info set counter_value=counter_value+1 where stud_id=113 and stud_name='Sa' and book_name='OOMD' and date_issue='2022-11-02' and book_id =444;
+update library_info set counter_value=counter_value+1 where stud_id=114 and stud_name='S' and book_name='ML' and date_issue='2022-10-05' and book_id =555;
+update library_info set counter_value=counter_value+1 where stud_id=112 and stud_name='A' and book_name='BDA' and date_issue='2022-10-03' and book_id =333;
+select * from library_info;
+ stud_id | stud_name | book_name | book_id | date_issue                      | counter_value
+---------+-----------+-----------+---------+---------------------------------+---------------
+     114 |     S |        ML |     555 | 2022-10-04 18:30:00.000000+0000 |             1
+     111 |    M |       BDA |     222 | 2022-09-05 18:30:00.000000+0000 |             1
+     113 |    Sa |      OOMD |     444 | 2022-11-01 18:30:00.000000+0000 |             1
+     112 |  A |       BDA |     333 | 2022-10-02 18:30:00.000000+0000 |             2
+
+4.Display the details of the table created and increase the value of the counter
+
+update library_info set counter_value=counter_value+1 where stud_id=114 and stud_name='Sneha' and book_name='ML' and date_issue='2022-10-05' and book_id =555;
+select * from library_info;
+ stud_id | stud_name | book_name | book_id | date_issue                      | counter_value
+---------+-----------+-----------+---------+---------------------------------+---------------
+     114 |     S |        ML |     555 | 2022-10-04 18:30:00.000000+0000 |             2
+     111 |    M |       BDA |     222 | 2022-09-05 18:30:00.000000+0000 |             1
+     113 |    Sa |      OOMD |     444 | 2022-11-01 18:30:00.000000+0000 |             1
+     112 |  A |       BDA |     333 | 2022-10-02 18:30:00.000000+0000 |             2
+
+
+5. Write a query to show that a student with id 112 has taken a book “BDA” 2 times.
+
+select * from library_info where stud_id=112;
+stud_id | stud_name | book_name | book_id | date_issue                      | counter_value
+---------+-----------+-----------+---------+---------------------------------+---------------
+     112 |  A|       BDA |     333 | 2022-10-02 18:30:00.000000+0000 |             2
+
+6. Export the created column to a csv file
+
+COPY  library_info(stud_id,stud_name,book_name,book_id,date_issue,counter_value) TO 'e:\library_info.csv';
+Using 11 child processes
+
+Starting copy of library1.library_info with columns [stud_id, stud_name, book_name, book_id, date_issue, counter_value].
+Processed: 4 rows; Rate:      33 rows/s; Avg. rate:      33 rows/s
+4 rows exported to 1 files in 0.150 seconds.
+
+7. Import a given csv dataset from local file system into Cassandra column family
+
+create table library_info2(stud_id int, counter_value counter, stud_name text,book_name text, date_issue timestamp, book_id int, PRIMARY KEY(stud_id,stud_name,book_name,date_issue,book_id));
+
+COPY library_info2(stud_id,stud_name,book_name,book_id,date_issue,counter_value) FROM 'e:\library_info.csv';
+
+Using 11 child processes
+
+Starting copy of library1.library_info2 with columns [stud_id, stud_name, book_name, book_id, date_issue, counter_value].
+Processed: 4 rows; Rate:       7 rows/s; Avg. rate:      10 rows/s
+4 rows imported from 1 files in 0.405 seconds (0 skipped).
