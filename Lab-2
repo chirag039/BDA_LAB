@@ -1,0 +1,95 @@
+1. Create a key space by name Employee
+
+CREATE KEYSPACE employee1 WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 3};
+
+use employee;
+
+2. Create a column family by name Employee-Info with attributes Emp_Id Primary Key, Emp_Name, Designation, Date_of_Joining, Salary, Dept_Name
+
+CREATE TABLE employee1_info(emp_id int primary key,emp_name text,designation text,date_of_joining timestamp,salary int,dept_name text);
+
+3. Insert the values into the table in batch
+
+begin batch 
+insert into employee1_info(emp_id,emp_name,designation,date_of_joining,salary,dept_name) values (1,'Nikita','manager','2022-04-27',3000000,'xyz');
+insert into employee1_info(emp_id,emp_name,designation,date_of_joining,salary,dept_name) values (2,'Neha','account','2022-04-05',370000,'fhn');
+insert into employee1_info(emp_id,emp_name,designation,date_of_joining,salary,dept_name) values (3,'Krisha','asst engineer','2022-02-03',800000,'qwe');
+apply batch;
+
+select * from employee1_info;
+
+
+emp_id | date_of_joining                 | dept_name | designation   | emp_name | salary
+--------+---------------------------------+-----------+---------------+----------+---------
+      1 | 2022-04-24 18:30:00.000000+0000 |       xyz |       manager | Nikita | 3000000
+      2 | 2022-04-04 18:30:00.000000+0000 |       fhn |       account |   Neha |  370000
+      3 | 2022-02-02 18:30:00.000000+0000 |       qwe | asst engineer |  Krisha |  800000
+
+4. Update Employee name and Department of Emp-Id 2
+
+update employee1_info set emp_name='ioi',dept_name='lll' where emp_id=2;
+mp_id | date_of_joining                 | dept_name | designation   | emp_name | salary
+--------+---------------------------------+-----------+---------------+----------+---------
+      1 | 2022-04-24 18:30:00.000000+0000 |       xyz |       manager | Nikita | 3000000
+      2 | 2022-04-04 18:30:00.000000+0000 |       lll |       account |   ioi |  370000
+      3 | 2022-02-02 18:30:00.000000+0000 |       qwe | asst engineer |  Krisha|  800000
+
+5. Sort the details of Employee records based on salary
+
+
+
+create table emp11(id int, salary int,name text, primary key(id,salary));
+
+begin batch insert into emp11(id,salary,name) values (1,89900,'kjl'); insert into emp11(id,salary,name) values (2,70000,'uiu'); apply batch;
+
+paging off;
+Disabled Query paging.
+cqlsh:employee> select * from emp11 where id in (1,2) order by salary;
+
+ id | salary | name
+----+--------+------
+  2 |  70000 |  uiu
+  1 |  89900 |  kjl
+
+
+
+
+6. Alter the schema of the table Employee_Info to add a column Projects which stores a set of Projects done by the corresponding Employee.
+
+alter table employee1_info add projects set<text>;
+
+7. Update the altered table to add project names.
+
+cqlsh:employee> update employee1_info set projects=projects+{'ooo','klk'} where emp_id=1;
+cqlsh:employee> update employee1_info set projects=projects+{'yyy'} where emp_id=2;
+cqlsh:employee> update employee1_info set projects=projects+{'zxz'} where emp_id=3;
+cqlsh:employee> select * from employee1_info;
+
+ emp_id | date_of_joining                 | dept_name | designation   | emp_name | projects       | salary
+--------+---------------------------------+-----------+---------------+----------+----------------+---------
+      1 | 2022-04-24 18:30:00.000000+0000 |       xyz |       manager | Nikita | {'klk', 'ooo'} | 3000000
+      2 | 2022-04-04 18:30:00.000000+0000 |       lll |       account |   Neha |        {'yyy'} |  370000
+      3 | 2022-02-02 18:30:00.000000+0000 |       qwe | asst engineer |  Krisha |        null    |  400000
+
+
+
+8 Create a TTL of 15 seconds to display the values of Employees.
+
+insert into employee1_info(emp_id,emp_name,designation,date_of_joining,salary,dept_name)
+values(4,'abc','manager','2021-02-02',400000,'sales')  using ttl 30;
+cqlsh:employee_db> select * from employee1_info;
+
+emp_id | date_of_joining                 | dept_name | designation   | emp_name | projects       | salary
+--------+---------------------------------+-----------+---------------+----------+----------------+---------
+      1 | 2022-04-24 18:30:00.000000+0000 |       xyz |       manager | Nikita | {'klk', 'ooo'} | 3000000
+      2 | 2022-04-04 18:30:00.000000+0000 |       lll |       account |   Neha |        {'yyy'} |  370000
+      3 | 2022-02-02 18:30:00.000000+0000 |       qwe | asst engineer | Krisha |        {'zxz'} |  800000
+      4 | 2021-02-02 18:30:00.000000+0000 |       sale| asst engineer |      abc |        {'zxz'} |  800000
+select ttl(emp_name) from employee1_info where emp_id=4;
+ ttl(emp_name)
+
+
+
+cqlsh:employee_db> select ttl(emp_name) from employee_info where emp_id=4;
+
+ ttl(emp_name)
