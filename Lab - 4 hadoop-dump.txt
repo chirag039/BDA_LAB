@@ -1,0 +1,124 @@
+bmsce@bmsce-Precision-T1700:~$ sudo su hduser
+[sudo] password for bmsce: 
+hduser@bmsce-Precision-T1700:/home/bmsce$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: starting namenode, logging to /usr/local/hadoop/logs/hadoop-hduser-namenode-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-bmsce-Precision-T1700.out
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-bmsce-Precision-T1700.out
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-bmsce-Precision-T1700.out
+hduser@bmsce-Precision-T1700:/home/bmsce$ jps
+4306 SecondaryNameNode
+4851 NodeManager
+3397 DataNode
+3206 NameNode
+4491 ResourceManager
+4975 Jps
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls
+ls: `.': No such file or directory
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls /
+Found 9 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:42 /DIR2
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:27 /Dir2
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 14:34 /manju
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:36 /new
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:10 /prac
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:16 /prac1
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:19 /prac2
+drwxrwxr-x   - hduser supergroup          0 2019-10-09 14:54 /tmp
+drwxr-xr-x   - hduser supergroup          0 2019-08-01 16:03 /user
+hduser@bmsce-Precision-T1700:/home/bmsce$ cat "abcdefghijklmnopqrstuvwxyz">test.txt
+bash: test.txt: Permission denied
+hduser@bmsce-Precision-T1700:/home/bmsce$ pwd
+/home/bmsce
+hduser@bmsce-Precision-T1700:/home/bmsce$ ls
+ 123                       ns-allinone-3.29
+ 1b.l                      ns-allinone-3.29.tar.bz2
+ 1b.y                      output.txt
+ 6a.l                      partimage
+ 6b.l                      pg1.l
+ 6b.y                      pg2.l
+ Android                   pg2.y
+ AndroidStudioProjects     pg3.c
+ a.out                     pg4.c
+ aruna.csv                 pg5.c
+ cassandra                 pg7.c
+ Desktop                   pg8.c
+ divyanshu                 pg9.c
+'d:\library_info_4.csv'    Pictures
+ Documents                 pt
+ Downloads                 Public
+ eclipse-workspace         R
+ editor                    snap
+ f1.c                      softwares
+ f2.c                      spark-2.4.8-bin-hadoop2.6.tgz
+ fp                        supriya
+ index1                    Templates
+ input.txt                 unix
+ lex.yy.c                  Videos
+ Music                     y.tab.c
+ ns-allinone-2.35          y.tab.h
+ ns-allinone-2.35.tar.gz
+
+bmsce@bmsce-Precision-T1700:~$ sudo su hduser
+[sudo] password for bmsce: 
+hduser@bmsce-Precision-T1700:/home/bmsce$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+localhost: namenode running as process 3206. Stop it first.
+hduser@localhost's password: 
+localhost: datanode running as process 3397. Stop it first.
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: secondarynamenode running as process 4306. Stop it first.
+bstarting yarn daemons
+resourcemanager running as process 4491. Stop it first.
+hduser@localhost's password: 
+hduser@localhost's password: localhost: Permission denied, please try again.
+
+localhost: nodemanager running as process 4851. Stop it first.
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -mkdir /dak
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls
+ls: `.': No such file or directory
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls /
+Found 10 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:42 /DIR2
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:27 /Dir2
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 14:55 /dak
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 14:34 /manju
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:36 /new
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:10 /prac
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:16 /prac1
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:19 /prac2
+drwxrwxr-x   - hduser supergroup          0 2019-10-09 14:54 /tmp
+drwxr-xr-x   - hduser supergroup          0 2019-08-01 16:03 /user
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -touch /dak/abcd.txt
+-touch: Unknown command
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -touchz /dak/abcd.txt
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls /dak
+Found 1 items
+-rw-r--r--   1 hduser supergroup          0 2022-06-03 14:55 /dak/abcd.txt
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -copyFromLocal /Downloads/test.txt /dak
+copyFromLocal: `/Downloads/test.txt': No such file or directory
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -copyFromLocal /home/bmsce/Downloads/test.txt /dak
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls /dak
+Found 2 items
+-rw-r--r--   1 hduser supergroup          0 2022-06-03 14:55 /dak/abcd.txt
+-rw-r--r--   1 hduser supergroup         25 2022-06-03 15:07 /dak/test.txt
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -put /home/bmsce/Downloads/main.c /home/bmsce/Downloads/hadoop-dump.txt /dak
+hduser@bmsce-Precision-T1700:/home/bmsce$ hdfs dfs -ls /dak
+Found 4 items
+-rw-r--r--   1 hduser supergroup          0 2022-06-03 14:55 /dak/abcd.txt
+-rw-r--r--   1 hduser supergroup          0 2022-06-03 15:09 /dak/hadoop-dump.txt
+-rw-r--r--   1 hduser supergroup        170 2022-06-03 15:09 /dak/main.c
+-rw-r--r--   1 hduser supergroup         25 2022-06-03 15:07 /dak/test.txt
+hduser@bmsce-Precision-T1700:/home/bmsce$ 
+
