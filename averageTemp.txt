@@ -1,0 +1,126 @@
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyFromLocal /home/hduser/Downloads/tempdata.txt /adarsh/tempdata.txt
+
+
+hduser@bmsce-Precision-T1700:~$ hadoop jar /home/hduser/eclipse-workspace/temp.jar AverageDriver /adarsh/tempdata.txt /outputtemp
+22/06/27 13:15:56 INFO Configuration.deprecation: session.id is deprecated. Instead, use dfs.metrics.session-id
+22/06/27 13:15:56 INFO jvm.JvmMetrics: Initializing JVM Metrics with processName=JobTracker, sessionId=
+22/06/27 13:15:56 WARN mapreduce.JobSubmitter: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+22/06/27 13:15:57 INFO input.FileInputFormat: Total input paths to process : 1
+22/06/27 13:15:57 INFO mapreduce.JobSubmitter: number of splits:1
+22/06/27 13:15:57 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local637582729_0001
+22/06/27 13:15:57 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+22/06/27 13:15:57 INFO mapreduce.Job: Running job: job_local637582729_0001
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapreduce.lib.output.FileOutputCommitter
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: Waiting for map tasks
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: Starting task: attempt_local637582729_0001_m_000000_0
+22/06/27 13:15:57 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+22/06/27 13:15:57 INFO mapred.MapTask: Processing split: hdfs://localhost:54310/adarsh/tempdata.txt:0+888190
+22/06/27 13:15:57 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+22/06/27 13:15:57 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+22/06/27 13:15:57 INFO mapred.MapTask: soft limit at 83886080
+22/06/27 13:15:57 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+22/06/27 13:15:57 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+22/06/27 13:15:57 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: 
+22/06/27 13:15:57 INFO mapred.MapTask: Starting flush of map output
+22/06/27 13:15:57 INFO mapred.MapTask: Spilling map output
+22/06/27 13:15:57 INFO mapred.MapTask: bufstart = 0; bufend = 59076; bufvoid = 104857600
+22/06/27 13:15:57 INFO mapred.MapTask: kvstart = 26214396(104857584); kvend = 26188144(104752576); length = 26253/6553600
+22/06/27 13:15:57 INFO mapred.MapTask: Finished spill 0
+22/06/27 13:15:57 INFO mapred.Task: Task:attempt_local637582729_0001_m_000000_0 is done. And is in the process of committing
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: map
+22/06/27 13:15:57 INFO mapred.Task: Task 'attempt_local637582729_0001_m_000000_0' done.
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: Finishing task: attempt_local637582729_0001_m_000000_0
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: map task executor complete.
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: Waiting for reduce tasks
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: Starting task: attempt_local637582729_0001_r_000000_0
+22/06/27 13:15:57 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+22/06/27 13:15:57 INFO mapred.ReduceTask: Using ShuffleConsumerPlugin: org.apache.hadoop.mapreduce.task.reduce.Shuffle@42e77ba0
+22/06/27 13:15:57 INFO reduce.MergeManagerImpl: MergerManager: memoryLimit=349752512, maxSingleShuffleLimit=87438128, mergeThreshold=230836672, ioSortFactor=10, memToMemMergeOutputsThreshold=10
+22/06/27 13:15:57 INFO reduce.EventFetcher: attempt_local637582729_0001_r_000000_0 Thread started: EventFetcher for fetching Map Completion Events
+22/06/27 13:15:57 INFO reduce.LocalFetcher: localfetcher#1 about to shuffle output of map attempt_local637582729_0001_m_000000_0 decomp: 72206 len: 72210 to MEMORY
+22/06/27 13:15:57 INFO reduce.InMemoryMapOutput: Read 72206 bytes from map-output for attempt_local637582729_0001_m_000000_0
+22/06/27 13:15:57 INFO reduce.MergeManagerImpl: closeInMemoryFile -> map-output of size: 72206, inMemoryMapOutputs.size() -> 1, commitMemory -> 0, usedMemory ->72206
+22/06/27 13:15:57 INFO reduce.EventFetcher: EventFetcher is interrupted.. Returning
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: 1 / 1 copied.
+22/06/27 13:15:57 INFO reduce.MergeManagerImpl: finalMerge called with 1 in-memory map-outputs and 0 on-disk map-outputs
+22/06/27 13:15:57 INFO mapred.Merger: Merging 1 sorted segments
+22/06/27 13:15:57 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 72199 bytes
+22/06/27 13:15:57 INFO reduce.MergeManagerImpl: Merged 1 segments, 72206 bytes to disk to satisfy reduce memory limit
+22/06/27 13:15:57 INFO reduce.MergeManagerImpl: Merging 1 files, 72210 bytes from disk
+22/06/27 13:15:57 INFO reduce.MergeManagerImpl: Merging 0 segments, 0 bytes from memory into reduce
+22/06/27 13:15:57 INFO mapred.Merger: Merging 1 sorted segments
+22/06/27 13:15:57 INFO mapred.Merger: Down to the last merge-pass, with 1 segments left of total size: 72199 bytes
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: 1 / 1 copied.
+22/06/27 13:15:57 INFO Configuration.deprecation: mapred.skip.on is deprecated. Instead, use mapreduce.job.skiprecords
+22/06/27 13:15:57 INFO mapred.Task: Task:attempt_local637582729_0001_r_000000_0 is done. And is in the process of committing
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: 1 / 1 copied.
+22/06/27 13:15:57 INFO mapred.Task: Task attempt_local637582729_0001_r_000000_0 is allowed to commit now
+22/06/27 13:15:57 INFO output.FileOutputCommitter: Saved output of task 'attempt_local637582729_0001_r_000000_0' to hdfs://localhost:54310/outputtemp/_temporary/0/task_local637582729_0001_r_000000
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: reduce > reduce
+22/06/27 13:15:57 INFO mapred.Task: Task 'attempt_local637582729_0001_r_000000_0' done.
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: Finishing task: attempt_local637582729_0001_r_000000_0
+22/06/27 13:15:57 INFO mapred.LocalJobRunner: reduce task executor complete.
+22/06/27 13:15:58 INFO mapreduce.Job: Job job_local637582729_0001 running in uber mode : false
+22/06/27 13:15:58 INFO mapreduce.Job:  map 100% reduce 100%
+22/06/27 13:15:58 INFO mapreduce.Job: Job job_local637582729_0001 completed successfully
+22/06/27 13:15:58 INFO mapreduce.Job: Counters: 38
+	File System Counters
+		FILE: Number of bytes read=152934
+		FILE: Number of bytes written=722642
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1776380
+		HDFS: Number of bytes written=8
+		HDFS: Number of read operations=13
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=4
+	Map-Reduce Framework
+		Map input records=6565
+		Map output records=6564
+		Map output bytes=59076
+		Map output materialized bytes=72210
+		Input split bytes=107
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=1
+		Reduce shuffle bytes=72210
+		Reduce input records=6564
+		Reduce output records=1
+		Spilled Records=13128
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=55
+		CPU time spent (ms)=0
+		Physical memory (bytes) snapshot=0
+		Virtual memory (bytes) snapshot=0
+		Total committed heap usage (bytes)=999292928
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=888190
+	File Output Format Counters 
+		Bytes Written=8
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -ls /outputtemp/
+Found 2 items
+-rw-r--r--   1 hduser supergroup          0 2022-06-27 13:15 /outputtemp/_SUCCESS
+-rw-r--r--   1 hduser supergroup          8 2022-06-27 13:15 /outputtemp/part-r-00000
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /outputtemp/part-r-00000
+1901	46
+
+
+hduser@bmsce-Precision-T1700:~$ 
+
+
